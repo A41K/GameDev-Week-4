@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bsnw1qjdlwqkg"]
+
+[ext_resource type="Script" uid="uid://c4sml3k63xh3" path="res://scripts/player.gd" id="1_rkhd4"]
+[ext_resource type="Texture2D" uid="uid://bn5rcah5ehj0o" path="res://icon.svg" id="2_lrhn5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkhd4"]
+size = Vector2(78, 77.999985)
+
+[node name="Character" type="Node2D" unique_id=190011663]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1458798645]
+z_index = -1
+position = Vector2(-989, 685)
+scale = Vector2(0.57277256, 0.56505454)
+script = ExtResource("1_rkhd4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1514023550]
+position = Vector2(20.000017, 9.999994)
+scale = Vector2(0.60937536, 0.60937536)
+texture = ExtResource("2_lrhn5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=667906998]
+position = Vector2(20, 10)
+shape = SubResource("RectangleShape2D_rkhd4")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=268828242]
+position = Vector2(19.204872, -35.394764)
+zoom = Vector2(2.5, 2.5)
+
+[node name="CoyoteTimer" type="Timer" parent="Player" unique_id=1345472251]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="Player" unique_id=969440994]
+wait_time = 0.12
+one_shot = true
+
+[node name="Left_HeadNudge" type="RayCast2D" parent="Player" unique_id=1430382837]
+position = Vector2(-7.9999695, -27)
+target_position = Vector2(0, -4)
+
+[node name="Left_HeadNudge2" type="RayCast2D" parent="Player" unique_id=2094400208]
+position = Vector2(-14.9999695, -27)
+target_position = Vector2(0, -4)
+
+[node name="Right_HeadNudge" type="RayCast2D" parent="Player" unique_id=1249941091]
+position = Vector2(47.00003, -27)
+target_position = Vector2(0, -4)
+
+[node name="Right_HeadNudge2" type="RayCast2D" parent="Player" unique_id=176780139]
+position = Vector2(54.00003, -27)
+target_position = Vector2(0, -4)
+
+[node name="Left_LedgeHop" type="RayCast2D" parent="Player" unique_id=1250739476]
+position = Vector2(-15.9999695, 45)
+target_position = Vector2(-6, 0)
+
+[node name="Left_LedgeHop2" type="RayCast2D" parent="Player" unique_id=1216507280]
+position = Vector2(-15.9999695, 39)
+target_position = Vector2(-6, 0)
+
+[node name="Right_LedgeHop" type="RayCast2D" parent="Player" unique_id=305211080]
+position = Vector2(56.00003, 45)
+target_position = Vector2(6, 0)
+
+[node name="Right_LedgeHop2" type="RayCast2D" parent="Player" unique_id=945091531]
+position = Vector2(55.86857, 38.934326)
+target_position = Vector2(6, 0)
