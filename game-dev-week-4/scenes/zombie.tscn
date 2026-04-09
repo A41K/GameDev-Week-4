@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bax6bq8i3hu80" path="res://scripts/zombie.gd" id="1_httt1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_httt1"]
-size = Vector2(30, 30)
+size = Vector2(34, 34)
 
 [node name="Zombie" type="Node2D" unique_id=1609250974]
 

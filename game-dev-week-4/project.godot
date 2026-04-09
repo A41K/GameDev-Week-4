@@ -13,7 +13,7 @@ config_version=5
 config/name="GameDev Week4"
 run/main_scene="uid://cy2wj55mcu8d4"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://images/icon.svg"
 
 [autoload]
 

@@ -5,6 +5,13 @@ signal health_changed(current_health: int, max_health: int)
 @export var max_health: int = 5
 var current_health: int = 5
 
+@export var attack_cooldown: float = 0.5
+var time_since_last_attack: float = 0.5
+
+var knockback_velocity: Vector2 = Vector2.ZERO
+var is_invincible: bool = false
+var invincibility_timer: float = 0.0
+
 @onready var CoyoteTimer: Timer = $CoyoteTimer
 @onready var JumpBufferTimer: Timer = $JumpBufferTimer
 
@@ -202,15 +209,31 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 0
 		
-	if Input.is_action_just_pressed("attack"):
+	if time_since_last_attack < attack_cooldown:
+		time_since_last_attack += delta
+		
+	if Input.is_action_just_pressed("attack") and time_since_last_attack >= attack_cooldown:
 		_attack_enemies()
+		time_since_last_attack = 0.0
+		
+	if is_invincible:
+		invincibility_timer -= delta
+		if invincibility_timer <= 0:
+			is_invincible = false
+			modulate.a = 1.0
+		else:
+			modulate.a = 0.5 if int(invincibility_timer * 10) % 2 == 0 else 1.0
+			
+	if knockback_velocity.x != 0:
+		velocity.x = knockback_velocity.x
+		knockback_velocity.x = move_toward(knockback_velocity.x, 0, friction * 15 * delta)
 	
 	move_and_slide()
 
 func _attack_enemies() -> void:
-	var attack_range: float = 60.0
+	var attack_range: float = 120.0
 	var enemies: Array = get_tree().get_nodes_in_group("enemy")
-	var facing_direction: float = 1.0 # default to right
+	var facing_direction: float = 1.0 
 	if Input.get_action_strength("left") > 0:
 		facing_direction = -1.0
 	elif velocity.x < -1.0:
@@ -221,20 +244,35 @@ func _attack_enemies() -> void:
 	for enemy in enemies:
 		var distance = global_position.distance_to(enemy.global_position)
 		if distance <= attack_range:
-			# Check if enemy is generally in front of player
 			var to_enemy = sign(enemy.global_position.x - global_position.x)
 			if to_enemy == sign(facing_direction) or to_enemy == 0:
 				if enemy.has_method("take_damage"):
-					enemy.take_damage(1)
+					var attack_damage = 1
+					var direction_vector = (enemy.global_position - global_position).normalized()
+					var knockback_force = Vector2(direction_vector.x * 200.0, -150.0)
+					enemy.take_damage(attack_damage, knockback_force)
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, knockback: Vector2 = Vector2.ZERO) -> void:
+	if is_invincible:
+		return
+		
 	current_health -= amount
 	health_changed.emit(current_health, max_health)
 	print("Player took ", amount, " damage! Health: ", current_health)
+	
+	if knockback != Vector2.ZERO:
+		knockback_velocity = knockback
+		velocity = knockback
+		
+	is_invincible = true
+	invincibility_timer = 1.0
 	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
 	print("Player died!")
-	respawn()
+	is_invincible = false
+	modulate.a = 1.0
+	knockback_velocity = Vector2.ZERO
+	get_tree().change_scene_to_file("res://scenes/death.tscn")
