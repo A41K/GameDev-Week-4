@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b5fyrvlm5crgq" path="res://scenes/level_2.tscn" id="10_0o2or"]
 [ext_resource type="PackedScene" uid="uid://du2jnoorr4ic1" path="res://scenes/level_3.tscn" id="10_jifap"]
 [ext_resource type="PackedScene" uid="uid://bol7upp5tucsp" path="res://scenes/coin_ui.tscn" id="11_xl61e"]
+[ext_resource type="PackedScene" uid="uid://dmclhaxpdg30k" path="res://scenes/level_4.tscn" id="12_0o2or"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_457mv"]
 texture = ExtResource("1_hm37i")
@@ -219,4 +220,4 @@ tile_set = SubResource("TileSet_4c2fu")
 
 [node name="LevelController" type="Node2D" parent="." unique_id=1193485047]
 script = ExtResource("8_jifap")
-level_chunks = Array[PackedScene]([ExtResource("9_xl61e"), ExtResource("10_0o2or"), ExtResource("10_jifap")])
+level_chunks = Array[PackedScene]([ExtResource("9_xl61e"), ExtResource("10_0o2or"), ExtResource("10_jifap"), ExtResource("12_0o2or")])

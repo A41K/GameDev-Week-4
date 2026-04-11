@@ -1,19 +1,33 @@
 [gd_scene format=3 uid="uid://da648jhv2ftvi"]
 
 [ext_resource type="Script" uid="uid://dg3wsu8kgj484" path="res://scripts/title_screen.gd" id="1_0hhgj"]
+[ext_resource type="Script" uid="uid://d0ld4xmstwmu5" path="res://scripts/death_score.gd" id="2_w8wr1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8wr1"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjai8"]
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1r8t"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.7121294, 0.7121294, 0.71212935, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6up1m"]
 
 [node name="Death" type="Control" unique_id=1756078423]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -1250.0
@@ -33,13 +47,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 433.0
-offset_top = 324.0
+offset_top = 367.0
 offset_right = 833.0
-offset_bottom = 574.0
+offset_bottom = 409.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1450460565]
+[node name="Restart" type="Button" parent="VBoxContainer" unique_id=1450460565]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
@@ -60,4 +74,23 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_q1r8t")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6up1m")
 text = "restart"
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="Died" type="Label" parent="." unique_id=2101358957]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 135.0
+offset_right = 772.0
+offset_bottom = 223.0
+theme_override_font_sizes/font_size = 64
+text = "You died"
+
+[node name="Score" type="Label" parent="." unique_id=871527767]
+layout_mode = 0
+offset_left = 585.0
+offset_top = 265.0
+offset_right = 816.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+script = ExtResource("2_w8wr1")
+
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_button_pressed"]
