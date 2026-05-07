@@ -1,3 +1,10 @@
-A side scroller game that has a score system and enemies with a randomly generating infinite game.
-It was made in godot and all the textures can be found in the files.
-Survive
+A simple side-scroller ask type game made in godot.
+There are 5 different randomly generating chunks that make the game feel infinite
+The main objective is for the player to survive, defend yourself and collect coins
+It doesnt really have an end, but thats the beauty of it
+
+
+The game has a custom engine entirely made by me that gets the chunks and drops them randomly in order
+so it feels fluid. The engine is really easy to use for anyone. 
+
+<img width="1250" height="720" alt="image" src="https://github.com/user-attachments/assets/25582758-fbb4-4450-acf2-4fcbe1953d63" />
